@@ -9,11 +9,18 @@ from keras.models import load_model
 
 # Your existing code...
 lemmatizer = WordNetLemmatizer()
-intents = json.loads(open('intents.json').read())
 
-words = pickle.load(open('words.pkl', 'rb'))
-classes = pickle.load(open('classes.pkl', 'rb'))
-model = load_model('chatbotmodel.keras')
+intents_file_path = r"C:\Users\Admin\Documents\GitHub\CSCobot\intelbot - Copy\intents.json"
+intents = json.loads(open(intents_file_path).read())
+
+words_file_path = r"C:\Users\Admin\Documents\GitHub\CSCobot\intelbot - Copy\words.pkl"
+words = pickle.load(open(words_file_path, 'rb'))
+
+classes_file_path = r"C:\Users\Admin\Documents\GitHub\CSCobot\intelbot - Copy\classes.pkl"
+classes = pickle.load(open(classes_file_path, 'rb'))
+
+model_file_path = r"C:\Users\Admin\Documents\GitHub\CSCobot\intelbot - Copy\chatbotmodel.keras"
+model = load_model(model_file_path)
 
 
 def clean_up_sentence(sentence):
@@ -46,6 +53,7 @@ def predict_class(sentence):
         return_list.append({'intent': classes[r[0]], 'probability': str(r[1])})
     return return_list
 
+
 # Connect to PostgreSQL database
 conn = psycopg2.connect(
     host="localhost",
@@ -54,22 +62,21 @@ conn = psycopg2.connect(
     password="Password123"
 )
 
-# Other existing code...
 
 def get_response(intents_list, intents_json, student_id):
     tag = intents_list[0]['intent']
     list_of_intents = intents_json['intents']
-    
+
     # Check if it's a personal query based on the intent tag or keywords
-    personal_queries = ["name","dept_name", "tot_cred"]
-    
+    personal_queries = ["name", "dept_name", "tot_cred"]
+
     if tag in personal_queries:
         # Fetch user-specific data from the database
         cursor = conn.cursor()
         cursor.execute(f"SELECT {tag} FROM student WHERE id='{student_id}'")
         student_data = cursor.fetchone()
         cursor.close()
-        
+
         # Process the personal query and generate a response
         if student_data:
             response = student_data[0] if student_data[0] else "I couldn't retrieve that information."
@@ -84,15 +91,16 @@ def get_response(intents_list, intents_json, student_id):
                 break
         else:
             response = "I'm sorry, I couldn't understand your query."
-    
+
     return response
+
 
 print('CSCobot is running!')
 
 while True:
     # Here, user_id should be obtained after the user logs in
     student_id = '12345'
-    
+
     message = input("You: ")
     # Predict intent
     ints = predict_class(message)
