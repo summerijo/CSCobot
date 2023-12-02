@@ -79,7 +79,13 @@ def get_response(intents_list, intents_json, student_id):
 
         # Process the personal query and generate a response
         if student_data:
-            response = student_data[0] if student_data[0] else "I couldn't retrieve that information."
+            # response = student_data[0] if student_data[0] else "I couldn't retrieve that information."
+            if tag == "dept_name":
+                response = f"Your department is {student_data[0]}."
+            elif tag == "tot_cred":
+                response = f"Your total credits are {student_data[0]}."
+            elif tag == "name":
+                response = f"You are {student_data[0]}."
         else:
             response = "I couldn't retrieve your information."
     else:

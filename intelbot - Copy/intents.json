@@ -2,13 +2,13 @@
 {
   "tag": "greetings",
   "patterns": [
-    "hello",
-    "hey",
-    "hi",
-    "what's up",
-    "greetings",
-    "good day",
-    "maayong adlaw"
+    "Hello",
+    "Hey",
+    "Hi",
+    "Good day",
+    "Maayong adlaw",
+    "Hello, good morning.",
+    "Hello, good afternoon."
   ],
   "responses": [
     "Hello!",
@@ -37,22 +37,6 @@
     "I'm doing alright, thank you! How may I help you today?",
     "I'm good, thank you! How can I support you?",
     "I'm okay, thanks for asking! How can I assist you?"
-  ]
-},
-{
-  "tag": "good morning",
-  "patterns": [
-    "Hello, good morning.",
-    "Good Morning",
-    "Gmorning",
-    "Morning!",
-    "Good day!"
-  ],
-  "responses": [
-    "Hello! Good morning!",
-    "Good morning :)",
-    "Morning! How can I assist you?",
-    "Good day! How can I help?"
   ]
 },
 {
@@ -122,9 +106,9 @@
 {
   "tag": "creator",
   "patterns": [
-    "who created you",
-    "who developed you",
-    "the team who created you",
+    "Who created you?",
+    "Who developed you?",
+    "The team who created you.",
     "kinsay nagbuhat sa imo"
   ],
   "responses": [
@@ -436,9 +420,9 @@
 {
   "tag": "disagreement",
   "patterns": [
-    "you are wrong",
-    "that's not correct",
-    "this is incorrect",
+    "You are wrong",
+    "That's not correct",
+    "This is incorrect",
     "I disagree",
     "wrong information",
     "not accurate"
@@ -451,17 +435,29 @@
 {
   "tag": "single_word_responses",
   "patterns": [
-    "no",
     "yes",
     "maybe",
-    "ok",
-    "fine"
+    "Okay",
+    "nothing"
   ],
   "responses": [
     "I see.",
     "Understood.",
     "Got it.",
     "Alright."
+  ]
+},
+{
+  "tag": "thank you",
+  "patterns": [
+    "Thank you",
+    "Salamat",
+    "That was really helpful"
+  ],
+  "responses": [
+    "You are welcome :)",
+    "Glad I can help.",
+    "Of course! Is there anything else I can help you with?"
   ]
 },
 {
