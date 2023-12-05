@@ -1,2 +1,2 @@
 # CSCobot
-#Chatbot for the College of Information Sciences and Computing Students
+# Chatbot for the College of Information Sciences and Computing Students
