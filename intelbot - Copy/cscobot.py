@@ -57,7 +57,7 @@ def predict_class(sentence):
 # Connect to PostgreSQL database
 conn = psycopg2.connect(
     host="localhost",
-    database="university",
+    database="cisc",
     user="postgres",
     password="Password123"
 )
@@ -68,26 +68,54 @@ def get_response(intents_list, intents_json, student_id):
     list_of_intents = intents_json['intents']
 
     # Check if it's a personal query based on the intent tag or keywords
-    personal_queries = ["name", "dept_name", "tot_cred"]
+    personal_queries = ["student_name", "year_level", "course", "track", "fine_id"]
 
     if tag in personal_queries:
-        # Fetch user-specific data from the database
-        cursor = conn.cursor()
-        cursor.execute(f"SELECT {tag} FROM student WHERE id='{student_id}'")
-        student_data = cursor.fetchone()
-        cursor.close()
 
-        # Process the personal query and generate a response
-        if student_data:
-            # response = student_data[0] if student_data[0] else "I couldn't retrieve that information."
-            if tag == "dept_name":
-                response = f"Your department is {student_data[0]}."
-            elif tag == "tot_cred":
-                response = f"Your total credits are {student_data[0]}."
-            elif tag == "name":
-                response = f"You are {student_data[0]}."
+        if tag == "fine_id":
+            cursor = conn.cursor()
+            cursor.execute(f"SELECT amount, reason FROM fines WHERE student_id='{student_id}'")
+            student_data = cursor.fetchall()
+            cursor.close()
+
+            fine_list = []
+
+            for fines in student_data:
+                fine = f"{fines[0]} - {fines[1]}"
+                fine_list.append(fine)
+
+            response = '\n'.join(fine_list)
+        
         else:
-            response = "I couldn't retrieve your information."
+            # Fetch user-specific data from the database
+            cursor = conn.cursor()
+            cursor.execute(f"SELECT {tag} FROM students WHERE student_id='{student_id}'")
+            student_data = cursor.fetchone()
+            cursor.close()
+
+            # Process the personal query and generate a response
+            if student_data:
+                # response = student_data[0] if student_data[0] else "I couldn't retrieve that information."
+                if tag == "student_name":
+                    response = f"Your name is {student_data[0]}."
+
+                elif tag == "year_level":
+                    if student_data[0] == 1:
+                        response = "You are a first year student."
+                    elif student_data[0] == 2:
+                        response = "You are a second year student."
+                    elif student_data[0] == 3:
+                        response = "You are a third year student."
+                    elif student_data[0] == 4:
+                        response = "You are a fourth year student."
+
+                elif tag == "course":
+                    response = f"You are a {student_data[0]} student."
+
+                elif tag == "track":
+                    response = f"Your in the {student_data[0]} track."
+            else:
+                response = "I couldn't retrieve your information."
     else:
         # Process non-personal queries
         for intent in list_of_intents:
@@ -105,7 +133,7 @@ print('CSCobot is running!')
 
 while True:
     # Here, user_id should be obtained after the user logs in
-    student_id = '12345'
+    student_id = '2'
 
     message = input("You: ")
     # Predict intent

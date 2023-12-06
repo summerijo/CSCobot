@@ -461,37 +461,62 @@
   ]
 },
 {
-  "tag": "dept_name",
+  "tag": "course",
   "patterns": [
-    "What department I am in?",
-    "What is my department?",
-    "My college department"
+    "What course I am in?",
+    "What is my course?",
+    "My college course"
   ],
   "responses": [
-    "Sorry, I have hard time finding out your department.",
+    "Sorry, I have hard time finding out your course.",
     "I currently cannot find the info about your department."
   ]
 },
 {
-  "tag": "tot_cred",
+  "tag": "fine_id",
   "patterns": [
-    "My total credits",
-    "How many credits do I have?"
+    "What are my fines",
+    "How many fines do I have?",
+    "Do i have fines?"
   ],
   "responses": [
-    "Sorry, I have hard time finding out your total credits.",
-    "I currently cannot find the info about your credits."
+    "Sorry, I have hard time finding out your fines.",
+    "I currently cannot find the info about your fines."
   ]
 },
 {
-  "tag": "name",
+  "tag": "student_name",
   "patterns": [
     "What is my name?",
-    "My name."
+    "My name.",
+    "Do you know me?"
   ],
   "responses": [
     "Sorry, I have hard time finding out your name.",
     "I currently cannot find the info about your name."
+  ]
+},
+{
+  "tag": "year_level",
+  "patterns": [
+    "Do you know my year level?",
+    "My year level"
+  ],
+  "responses": [
+    "Sorry, I have hard time finding out your year level.",
+    "I currently cannot find the info about your year level."
+  ]
+},
+{
+  "tag": "track",
+  "patterns": [
+    "What is my track?",
+    "My specialization track",
+    "Do you my track?"
+  ],
+  "responses": [
+    "Sorry, I have hard time finding out your track.",
+    "I currently cannot find the info about your track."
   ]
 }
 ]}
